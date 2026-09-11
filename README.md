@@ -43,8 +43,13 @@ gpx2map.bat day1.gpx day2.gpx -t "Col de Joclar" --format square --theme topo -o
 gpx2map.bat --list-themes
 ```
 
-The PNG goes next to the first GPX as `<name>_<theme>.png` unless `--out` is given. The
-picture has the size of the plate (`--max-size`, default 20 cm) at `--dpi` (default 300).
+The PNG goes next to the first GPX as `<Title>_<theme>.png` (for example
+`Pic-de-Cagire_wood.png`) unless `--out` or `--out-dir` is given. The picture has the size of
+the plate (`--max-size`, default 20 cm) at `--dpi` (default 300).
+
+Lake names and the altitude of the highest point are written on the map (with a halo so they
+stay readable over contours or the orthophoto); `--no-labels` removes them and
+`--map-label-size MM` resizes them. They only exist on pictures, never on the engraving SVG.
 
 Everything gpx2engraving accepts works here: `--title`, `--summit`, `--lang`, `--format`,
 `--max-size`, `--max-height`, `--size W H`, `--interval`, `--track-smooth`, `--despike`,
@@ -60,6 +65,9 @@ and `--lang` in the same language: the statistics line follows `--lang`.
 | `--theme` | `wood` | theme(s), comma-separated, or `all` |
 | `--dpi` | 300 | resolution; the plate size in mm is kept |
 | `--out`, `-o` | | output file (single theme) |
+| `--out-dir` | next to the GPX | folder for the default file names |
+| `--no-labels` | off | no lake names, no highest point on the map |
+| `--map-label-size` | profile label size | size of the map labels (mm) |
 | `--list-themes` | | list the themes and exit |
 
 ### Colours

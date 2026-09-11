@@ -35,7 +35,8 @@ def main():
         render.print_themes()
         return
     ap = engine.build_parser(add_output=False, description="GPX -> themed map picture (PNG).")
-    ap.add_argument("--out", "-o", help="output PNG (single theme; default: <gpx>_<theme>.png next to the first GPX)")
+    ap.add_argument("--out", "-o", help="output PNG (single theme; default: <Title>_<theme>.png next to the first GPX)")
+    ap.add_argument("--out-dir", help="folder for the default file names")
     ap.add_argument("--dpi", type=int, default=300, help="output resolution (the plate size in mm is kept)")
     render.add_theme_options(ap)
     args = ap.parse_args()
@@ -45,10 +46,12 @@ def main():
     overrides = render.overrides_from_args(args)
 
     plate = engine.build(args)
-    base = os.path.splitext(plate.files[0]["path"])[0]
+    out_dir = args.out_dir or os.path.dirname(os.path.abspath(plate.files[0]["path"]))
+    os.makedirs(out_dir, exist_ok=True)
     for th in themes:
-        out = args.out or f"{base}_{th}.png"
-        render.save_png(plate, th, out, dpi=args.dpi, cache_dir=args.cache_dir, overrides=overrides)
+        out = args.out or os.path.join(out_dir, f"{plate.slug}_{th}.png")
+        render.save_png(plate, th, out, dpi=args.dpi, cache_dir=args.cache_dir, overrides=overrides,
+                        labels=not args.no_labels, label_size_mm=args.map_label_size)
         engine.log(f"PNG written ({th}): {out}")
 
 
