@@ -48,7 +48,8 @@ The PNG goes next to the first GPX as `<Title>_<theme>.png` (for example
 the plate (`--max-size`, default 20 cm) at `--dpi` (default 300).
 
 Lake names and the altitude of the highest point are written on the map (with a halo so they
-stay readable over contours or the orthophoto); `--no-labels` removes them and
+stay readable over contours or the orthophoto), together with a **scale bar** (bottom-left) and a
+**north arrow** (top-right). `--no-labels`, `--no-scale-bar` and `--no-north` remove each, and
 `--map-label-size MM` resizes them. They only exist on pictures, never on the engraving SVG.
 
 Everything gpx2engraving accepts works here: `--title`, `--summit`, `--lang`, `--format`,
@@ -67,7 +68,8 @@ and `--lang` in the same language: the statistics line follows `--lang`.
 | `--out`, `-o` | | output file (single theme) |
 | `--out-dir` | next to the GPX | folder for the default file names |
 | `--no-labels` | off | no lake names, no highest point on the map |
-| `--map-label-size` | profile label size | size of the map labels (mm) |
+| `--no-scale-bar` / `--no-north` | off | drop the scale bar / the north arrow |
+| `--map-label-size` | profile label size | size of the map labels, scale bar and north (mm) |
 | `--list-themes` | | list the themes and exit |
 
 ### Colours

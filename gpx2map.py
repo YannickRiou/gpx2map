@@ -51,7 +51,8 @@ def main():
     for th in themes:
         out = args.out or os.path.join(out_dir, f"{plate.slug}_{th}.png")
         render.save_png(plate, th, out, dpi=args.dpi, cache_dir=args.cache_dir, overrides=overrides,
-                        labels=not args.no_labels, label_size_mm=args.map_label_size)
+                        labels=not args.no_labels, label_size_mm=args.map_label_size,
+                        scale_bar=not args.no_scale_bar, north=not args.no_north)
         engine.log(f"PNG written ({th}): {out}")
 
 
